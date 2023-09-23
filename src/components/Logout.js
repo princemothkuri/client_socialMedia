@@ -7,7 +7,6 @@ const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const logoutHandler = () => {};
   useEffect(() => {
     fetch("https://prince-server-socialmedia.onrender.com/api/logout/", {
       method: "GET",

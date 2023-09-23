@@ -20,7 +20,6 @@ const AddPost = () => {
     e.preventDefault();
 
     if (!pic || !description) {
-      // alert("please fill the details!");
       toast.warning("Plz fill all the details!");
     } else {
       setLoadingMoadal(true);
@@ -40,7 +39,6 @@ const AddPost = () => {
 
       const data = await res.json();
       console.log(data);
-      // console.log(data.status);
       if (data.status === 201) {
         toast.success("Post Uploaded!");
         console.log("Post Uploaded!");

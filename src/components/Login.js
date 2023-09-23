@@ -51,7 +51,6 @@ const Login = () => {
         if (data.status === 422) {
           setLoadingMoadal(false);
           toast.warning("Invalid username or password!");
-          // window.alert("Invalid email or password");
           console.log("Invalid username or password");
         } else {
           dispatch(
@@ -71,7 +70,6 @@ const Login = () => {
           );
           setLoadingMoadal(false);
           toast.success("Login Successful!");
-          // window.alert("Login Successful!");
           console.log("Login Successful!");
           navigate("/home");
         }

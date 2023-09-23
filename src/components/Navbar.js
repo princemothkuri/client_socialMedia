@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const status = useSelector((state) => state.media.loginStatus);
   const username = useSelector((state) => state.media.username);
-  console.log(status);
   const Render = () => {
     if (status) {
       return (

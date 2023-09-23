@@ -23,10 +23,8 @@ const ResetPassword = () => {
     e.preventDefault();
     const { username, email, password, cpassword } = user;
     if (!username || !email || !password || !cpassword) {
-      // alert("please fill the details!");
       toast.warning("Plz fill all the details!");
     } else if (password !== cpassword) {
-      // alert("Both passwords are not same!");
       toast.warning("Both passwords are not same!");
     } else {
       try {
@@ -50,11 +48,9 @@ const ResetPassword = () => {
         if (data.status === 422) {
           setLoadingMoadal(false);
           toast.warning("Invalid username or email-id!");
-          // window.alert("Invalid email or password");
           console.log("Invalid username or email-id");
         } else {
           toast.success("Password changed!");
-          // window.alert("Login Successful!");
           console.log("Password changed!");
           setTimeout(() => {
             setLoadingMoadal(false);

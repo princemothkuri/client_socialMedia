@@ -8,7 +8,6 @@ import Loading from "./Loading";
 const Post = () => {
   const navigate = useNavigate();
   const username = useSelector((state) => state.media.username);
-  // const { id } = useParams(); // add inside your component body
   const [searchParams, setSearchParams] = useSearchParams();
   const postID = searchParams.get("id");
 
@@ -50,8 +49,6 @@ const Post = () => {
     } catch (error) {
       console.log(error);
     }
-    // setdata((data) => [...data, { name: "sunitha" }]);
-    // console.log("done");
   };
 
   const getAllComments = async () => {

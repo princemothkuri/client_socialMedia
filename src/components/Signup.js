@@ -24,10 +24,8 @@ const Signup = () => {
     const { username, email, password, cpassword } = user;
 
     if (!username || !email || !password || !cpassword) {
-      // alert("please fill the details!");
       toast.warning("Plz fill all the details!");
     } else if (password !== cpassword) {
-      // alert("Both passwords are not same!");
       toast.warning("Both passwords are not same!");
     } else {
       setLoadingMoadal(true);
@@ -48,7 +46,6 @@ const Signup = () => {
 
       const data = await res.json();
       console.log(data);
-      // console.log(data.status);
       if (data.status === 400) {
         toast.success(`${username} you already registered!`);
         console.log("Email already exists!");
@@ -58,7 +55,6 @@ const Signup = () => {
         }, 3000);
       } else if (data.status === 201) {
         toast.success("Registration successful!");
-        // window.alert("Registration successful!");
         console.log("Registration successful!");
         setTimeout(() => {
           setLoadingMoadal(false);
@@ -66,7 +62,6 @@ const Signup = () => {
         }, 3000);
       } else {
         toast.warning("Invalid Registration!");
-        // window.alert("Invalid Registration");
         console.log("Invalid Registration");
         setLoadingMoadal(false);
       }

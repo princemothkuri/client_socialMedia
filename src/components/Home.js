@@ -15,7 +15,6 @@ import Post from "./Post";
 
 const Home = () => {
   const status = useSelector((state) => state.media.user);
-  // console.log(status);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [del, setDel] = useState(false);
@@ -38,22 +37,6 @@ const Home = () => {
       console.log(error);
     }
   };
-
-  // const likeHandler = () => {
-  //   if (like) {
-  //     setLike(false);
-  //   } else {
-  //     setLike(true);
-  //   }
-  // };
-
-  // const unLikeHandler = () => {
-  //   if (unLike) {
-  //     setUnLike(false);
-  //   } else {
-  //     setUnLike(true);
-  //   }
-  // };
 
   useEffect(() => {
     getAllPosts();
@@ -174,7 +157,6 @@ const Home = () => {
                     </div>
                     <div
                       className="comment d-flex justify-content-center align-items-center"
-                      //   style={{ border: "1px solid" }}
                       onClick={() => navigate(`/post?id=${item._id}`)}
                     >
                       <InsertCommentOutlinedIcon />
