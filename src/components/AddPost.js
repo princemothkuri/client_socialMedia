@@ -24,16 +24,19 @@ const AddPost = () => {
       toast.warning("Plz fill all the details!");
     } else {
       setLoadingMoadal(true);
-      const res = await fetch("/api/posts/post", {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          pic,
-          description,
-        }),
-      });
+      const res = await fetch(
+        "https://prince-server-socialmedia.onrender.com/api/posts/post",
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pic,
+            description,
+          }),
+        }
+      );
 
       const data = await res.json();
       console.log(data);
