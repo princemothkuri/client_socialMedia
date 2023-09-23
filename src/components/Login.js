@@ -117,7 +117,7 @@ const Login = () => {
                     </label>
                   </div>
                   <p className="text-end">
-                    <a href="/resetpassword">Forget password?</a>
+                    <a href="/resetpassword">Forgot password?</a>
                   </p>
                   <button
                     className="btn btn-primary btn-lg btn-block mt-2"
