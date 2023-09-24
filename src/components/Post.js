@@ -18,6 +18,7 @@ const Post = () => {
   const [description, setDescription] = useState("");
   const [pic, setPic] = useState();
   const [comments, setComments] = useState([]);
+  const jwt = useSelector((state) => state.media.userToken);
 
   const postComment = async (e) => {
     e.preventDefault();
@@ -35,6 +36,7 @@ const Post = () => {
             id: postID,
             comment: comment,
             username: username,
+            jwtoken: jwt,
           }),
         }
       );
@@ -62,11 +64,11 @@ const Post = () => {
           },
           body: JSON.stringify({
             id: postID,
+            jwtoken: jwt,
           }),
         }
       );
       const data = await response.json();
-      console.log(data);
       setPic(data.post.image);
       setComments(data.post.comments);
       setDescription(data.post.description);
@@ -79,7 +81,6 @@ const Post = () => {
 
   useEffect(() => {
     getAllComments();
-    console.log(comments[0]);
   }, []);
 
   if (loading) {

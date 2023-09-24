@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
+  const jwt = useSelector((state) => state.media.userToken);
+
   const navigate = useNavigate();
   const [loadingModal, setLoadingMoadal] = useState(false);
 
@@ -33,22 +37,20 @@ const AddPost = () => {
           body: JSON.stringify({
             pic,
             description,
+            jwtoken: jwt,
           }),
         }
       );
 
       const data = await res.json();
-      console.log(data);
       if (data.status === 201) {
         toast.success("Post Uploaded!");
-        console.log("Post Uploaded!");
         setTimeout(() => {
           setLoadingMoadal(false);
           navigate("/home");
         }, 2000);
       } else {
         toast.warning("post not sent!");
-        console.log("post not sent!");
         setLoadingMoadal(false);
       }
     }

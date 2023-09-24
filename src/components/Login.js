@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeStatus, user_id, user_name } from "../redux/mediaSlice";
+import {
+  changeStatus,
+  user_id,
+  user_name,
+  user_token,
+} from "../redux/mediaSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
@@ -47,11 +52,10 @@ const Login = () => {
           }
         );
         const data = await res.json();
-        console.log(data);
+
         if (data.status === 422) {
           setLoadingMoadal(false);
           toast.warning("Invalid username or password!");
-          console.log("Invalid username or password");
         } else {
           dispatch(
             changeStatus({
@@ -68,9 +72,13 @@ const Login = () => {
               username: data.username,
             })
           );
+          dispatch(
+            user_token({
+              userToken: data.token,
+            })
+          );
           setLoadingMoadal(false);
           toast.success("Login Successful!");
-          console.log("Login Successful!");
           navigate("/home");
         }
       } catch (err) {

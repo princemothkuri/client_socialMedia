@@ -14,6 +14,8 @@ import Loading from "./Loading";
 import Post from "./Post";
 
 const Home = () => {
+  const jwt = useSelector((state) => state.media.userToken);
+
   const status = useSelector((state) => state.media.user);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -26,11 +28,21 @@ const Home = () => {
 
   const getAllPosts = async () => {
     try {
-      const response = await axios.get(
-        "https://prince-server-socialmedia.onrender.com/api/posts/"
+      const res = await fetch(
+        "https://prince-server-socialmedia.onrender.com/api/posts",
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            jwtoken: jwt,
+          }),
+        }
       );
-      console.log(response.data.posts);
-      setPics(response.data.posts);
+      const response = await res.json();
+
+      setPics(response.message);
       setLoading(false);
       setLoadingMoadal(false);
     } catch (error) {
@@ -64,7 +76,7 @@ const Home = () => {
         {pics.map(function (item, index) {
           return (
             <>
-              <div className="card mb-3" key={index}>
+              <div className="card mb-3" key={item._id}>
                 <img src={item.image} className="card-img-top" alt="image" />
                 <div className="card-body">
                   <p className="card-text">
@@ -84,17 +96,21 @@ const Home = () => {
                           setLoadingMoadal(true);
 
                           try {
-                            const res = await fetch("/api/posts/like", {
-                              method: "PUT",
-                              headers: {
-                                "content-Type": "application/json",
-                              },
-                              body: JSON.stringify({
-                                id: item._id,
-                              }),
-                            });
+                            const res = await fetch(
+                              "https://prince-server-socialmedia.onrender.com/api/posts/like",
+                              {
+                                method: "PUT",
+                                headers: {
+                                  "content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  id: item._id,
+                                  jwtoken: jwt,
+                                }),
+                              }
+                            );
                             const data = await res.json();
-                            console.log(data);
+
                             if (data.status === 201) {
                               if (del) {
                                 setDel(false);
@@ -120,17 +136,21 @@ const Home = () => {
                           setLoadingMoadal(true);
 
                           try {
-                            const res = await fetch("/api/posts/unlike", {
-                              method: "PUT",
-                              headers: {
-                                "content-Type": "application/json",
-                              },
-                              body: JSON.stringify({
-                                id: item._id,
-                              }),
-                            });
+                            const res = await fetch(
+                              "https://prince-server-socialmedia.onrender.com/api/posts/unlike",
+                              {
+                                method: "PUT",
+                                headers: {
+                                  "content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  id: item._id,
+                                  jwtoken: jwt,
+                                }),
+                              }
+                            );
                             const data = await res.json();
-                            console.log(data);
+
                             if (data.status === 201) {
                               if (del) {
                                 setDel(false);
@@ -170,17 +190,21 @@ const Home = () => {
                         setLoadingMoadal(true);
 
                         try {
-                          const res = await fetch("/api/posts/", {
-                            method: "DELETE",
-                            headers: {
-                              "content-Type": "application/json",
-                            },
-                            body: JSON.stringify({
-                              id: item._id,
-                            }),
-                          });
+                          const res = await fetch(
+                            "https://prince-server-socialmedia.onrender.com/api/posts/",
+                            {
+                              method: "DELETE",
+                              headers: {
+                                "content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                id: item._id,
+                                jwtoken: jwt,
+                              }),
+                            }
+                          );
                           const data = await res.json();
-                          console.log(data);
+
                           if (del) {
                             setDel(false);
                           } else {

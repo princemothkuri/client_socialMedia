@@ -45,24 +45,20 @@ const Signup = () => {
       );
 
       const data = await res.json();
-      console.log(data);
       if (data.status === 400) {
         toast.success(`${username} you already registered!`);
-        console.log("Email already exists!");
         setTimeout(() => {
           setLoadingMoadal(false);
           navigate("/login");
         }, 3000);
       } else if (data.status === 201) {
         toast.success("Registration successful!");
-        console.log("Registration successful!");
         setTimeout(() => {
           setLoadingMoadal(false);
           navigate("/login");
         }, 3000);
       } else {
         toast.warning("Invalid Registration!");
-        console.log("Invalid Registration");
         setLoadingMoadal(false);
       }
     }

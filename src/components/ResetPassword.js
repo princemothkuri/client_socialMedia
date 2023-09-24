@@ -44,14 +44,11 @@ const ResetPassword = () => {
           }
         );
         const data = await res.json();
-        console.log(data);
         if (data.status === 422) {
           setLoadingMoadal(false);
           toast.warning("Invalid username or email-id!");
-          console.log("Invalid username or email-id");
         } else {
           toast.success("Password changed!");
-          console.log("Password changed!");
           setTimeout(() => {
             setLoadingMoadal(false);
 
