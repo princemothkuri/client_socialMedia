@@ -8,7 +8,7 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("api/logout/", {
+    fetch("https://prince-server-socialmedia.onrender.com/api/logout/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -29,17 +29,20 @@ const Signup = () => {
       toast.warning("Both passwords are not same!");
     } else {
       setLoadingMoadal(true);
-      const res = await fetch("api/register/", {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        }),
-      });
+      const res = await fetch(
+        "https://prince-server-socialmedia.onrender.com/api/register/",
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        }
+      );
 
       const data = await res.json();
       console.log(data);

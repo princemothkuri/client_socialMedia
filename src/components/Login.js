@@ -33,16 +33,19 @@ const Login = () => {
     } else {
       try {
         setLoadingMoadal(true);
-        const res = await fetch("api/users/", {
-          method: "POST",
-          headers: {
-            "content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username,
-            password,
-          }),
-        });
+        const res = await fetch(
+          "https://prince-server-socialmedia.onrender.com/api/users/",
+          {
+            method: "POST",
+            headers: {
+              "content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username,
+              password,
+            }),
+          }
+        );
         const data = await res.json();
         console.log(data);
         if (data.status === 422) {
