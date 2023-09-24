@@ -57,7 +57,7 @@
 }
 
 .containerHome {
-  width: 50%;
+  width: 55%;
   margin: 30px auto;
 }
 
@@ -209,4 +209,25 @@
   flex: 1;
   height: 1px;
   background: #eee;
+}
+
+@media screen and (max-width: 992px) {
+  .containerHome {
+    width: 80%;
+    margin: 30px auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .containerHome {
+    width: 90%;
+    margin: 30px auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .containerHome {
+    width: 95%;
+    margin: 30px auto;
+  }
 }

@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
-import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
-import InsertCommentOutlinedIcon from "@mui/icons-material/InsertCommentOutlined";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactLoading from "react-loading";
 import Loading from "./Loading";
-import Post from "./Post";
+import PostCards from "./PostCards";
 
 const Home = () => {
   const jwt = useSelector((state) => state.media.userToken);
 
-  const status = useSelector((state) => state.media.user);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [del, setDel] = useState(false);
-  const [loadingModal, setLoadingMoadal] = useState(false);
-  const [like, setLike] = useState(false);
-  const [unLike, setUnLike] = useState(false);
 
   const [pics, setPics] = useState();
 
@@ -41,10 +28,8 @@ const Home = () => {
         }
       );
       const response = await res.json();
-
       setPics(response.message);
       setLoading(false);
-      setLoadingMoadal(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +37,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllPosts();
-  }, [del]);
+  }, []);
 
   if (loading) {
     return (
@@ -74,191 +59,14 @@ const Home = () => {
       </div>
       <div className="containerHome">
         {pics.map(function (item, index) {
+          // console.log("log from home -> " + item.username);
           return (
             <>
-              <div className="card mb-3" key={item._id}>
-                <img src={item.image} className="card-img-top" alt="image" />
-                <div className="card-body">
-                  <p className="card-text">
-                    <small className="text-muted">Description</small>
-                    <br />
-                    {item.description}
-                  </p>
-                  <p>
-                    <small className="text-muted">Posted by:</small>
-                    <br />@{item.username}
-                  </p>
-                  <div className="card-btn d-flex justify-content-between gap-3">
-                    <div className=" d-flex gap-3 mt-3">
-                      <div
-                        className="like"
-                        onClick={async () => {
-                          setLoadingMoadal(true);
-
-                          try {
-                            const res = await fetch(
-                              "https://prince-server-socialmedia.onrender.com/api/posts/like",
-                              {
-                                method: "PUT",
-                                headers: {
-                                  "content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                  id: item._id,
-                                  jwtoken: jwt,
-                                }),
-                              }
-                            );
-                            const data = await res.json();
-
-                            if (data.status === 201) {
-                              if (del) {
-                                setDel(false);
-                              } else {
-                                setDel(true);
-                              }
-                            } else {
-                              toast.alert("you have already liked!");
-                            }
-                          } catch (error) {
-                            setLoadingMoadal(false);
-
-                            console.log(error);
-                          }
-                        }}
-                      >
-                        {!like ? <ThumbUpOutlinedIcon /> : <ThumbUpIcon />}(
-                        {item.likes.length})
-                      </div>
-                      <div
-                        className="unlike"
-                        onClick={async () => {
-                          setLoadingMoadal(true);
-
-                          try {
-                            const res = await fetch(
-                              "https://prince-server-socialmedia.onrender.com/api/posts/unlike",
-                              {
-                                method: "PUT",
-                                headers: {
-                                  "content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                  id: item._id,
-                                  jwtoken: jwt,
-                                }),
-                              }
-                            );
-                            const data = await res.json();
-
-                            if (data.status === 201) {
-                              if (del) {
-                                setDel(false);
-                              } else {
-                                setDel(true);
-                              }
-                            } else {
-                              toast.alert("you have already unliked!");
-                            }
-                          } catch (error) {
-                            setLoadingMoadal(false);
-
-                            console.log(error);
-                          }
-                        }}
-                      >
-                        {!unLike ? (
-                          <ThumbDownAltOutlinedIcon />
-                        ) : (
-                          <ThumbDownIcon />
-                        )}
-                        ({item.unlikes.length})
-                      </div>
-                    </div>
-                    <div
-                      className="comment d-flex justify-content-center align-items-center"
-                      onClick={() => navigate(`/post?id=${item._id}`)}
-                    >
-                      <InsertCommentOutlinedIcon />
-                      <p className="p-1 mt-2">Comments</p>
-                    </div>
-                  </div>
-                  {item.user === status ? (
-                    <button
-                      className="btn btn-outline-danger mt-1"
-                      onClick={async () => {
-                        setLoadingMoadal(true);
-
-                        try {
-                          const res = await fetch(
-                            "https://prince-server-socialmedia.onrender.com/api/posts/",
-                            {
-                              method: "DELETE",
-                              headers: {
-                                "content-Type": "application/json",
-                              },
-                              body: JSON.stringify({
-                                id: item._id,
-                                jwtoken: jwt,
-                              }),
-                            }
-                          );
-                          const data = await res.json();
-
-                          if (del) {
-                            setDel(false);
-                          } else {
-                            setDel(true);
-                          }
-                        } catch (error) {
-                          setLoadingMoadal(false);
-
-                          console.log(error);
-                        }
-                      }}
-                    >
-                      Delete post
-                    </button>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                {/* --------------modal-Loading--------------- */}
-                {loadingModal ? (
-                  <>
-                    <div className="modal-wrapper "></div>
-                    <div className="modal-container-loading">
-                      <div className="circleDots">
-                        <ReactLoading
-                          type="spinningBubbles"
-                          color="#0000FF"
-                          height={80}
-                          width={80}
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  ""
-                )}
-                {/* --------------modal-Loading END--------------- */}
-              </div>
+              <PostCards key={item._id} item={item} />
             </>
           );
         })}
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 };
