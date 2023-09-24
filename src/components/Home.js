@@ -26,9 +26,7 @@ const Home = () => {
 
   const getAllPosts = async () => {
     try {
-      const response = await axios.get(
-        "https://prince-server-socialmedia.onrender.com/api/posts/"
-      );
+      const response = await axios.get("api/posts/");
       console.log(response.data.posts);
       setPics(response.data.posts);
       setLoading(false);

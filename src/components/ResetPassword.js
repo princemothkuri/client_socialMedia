@@ -29,20 +29,17 @@ const ResetPassword = () => {
     } else {
       try {
         setLoadingMoadal(true);
-        const res = await fetch(
-          "https://prince-server-socialmedia.onrender.com/api/users/reset",
-          {
-            method: "PUT",
-            headers: {
-              "content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username,
-              email,
-              password,
-            }),
-          }
-        );
+        const res = await fetch("api/users/reset", {
+          method: "PUT",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        });
         const data = await res.json();
         console.log(data);
         if (data.status === 422) {

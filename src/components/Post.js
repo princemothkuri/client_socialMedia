@@ -24,20 +24,17 @@ const Post = () => {
     try {
       setLoadingMoadal(true);
 
-      const response = await fetch(
-        "https://prince-server-socialmedia.onrender.com/api/posts/comment",
-        {
-          method: "POST",
-          headers: {
-            "content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: postID,
-            comment: comment,
-            username: username,
-          }),
-        }
-      );
+      const response = await fetch("api/posts/comment", {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: postID,
+          comment: comment,
+          username: username,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       setComments((comments) => [
@@ -53,18 +50,15 @@ const Post = () => {
 
   const getAllComments = async () => {
     try {
-      const response = await fetch(
-        "https://prince-server-socialmedia.onrender.com/api/posts/postid",
-        {
-          method: "POST",
-          headers: {
-            "content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: postID,
-          }),
-        }
-      );
+      const response = await fetch("api/posts/postid", {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: postID,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       setPic(data.post.image);
