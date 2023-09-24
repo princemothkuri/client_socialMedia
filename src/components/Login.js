@@ -100,7 +100,10 @@ const Login = () => {
                 <div className="card-body p-5 text-center">
                   <h3 className="mb-5">Sign in</h3>
 
-                  <div className="form-outline mb-4">
+                  <div className="form-outline mb-4 text-start">
+                    <label className="form-label m-1" for="typeEmailX-2">
+                      Username
+                    </label>
                     <input
                       type="text"
                       id="typeEmailX-2"
@@ -108,12 +111,12 @@ const Login = () => {
                       name="username"
                       onChange={inputHandler}
                     />
-                    <label className="form-label" for="typeEmailX-2">
-                      Username
-                    </label>
                   </div>
 
-                  <div className="form-outline mb-4">
+                  <div className="form-outline mb-4 text-start">
+                    <label className="form-label m-1" for="typePasswordX-2">
+                      Password
+                    </label>
                     <input
                       type="password"
                       id="typePasswordX-2"
@@ -121,9 +124,6 @@ const Login = () => {
                       name="password"
                       onChange={inputHandler}
                     />
-                    <label className="form-label" for="typePasswordX-2">
-                      Password
-                    </label>
                   </div>
                   <p className="text-end">
                     <a href="/resetpassword">Forgot password?</a>

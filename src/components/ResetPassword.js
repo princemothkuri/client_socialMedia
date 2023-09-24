@@ -75,7 +75,10 @@ const ResetPassword = () => {
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
               <form>
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4 text-start">
+                  <label className="form-label m-1" for="form1Example13">
+                    Username
+                  </label>
                   <input
                     type="text"
                     id="form1Example13"
@@ -83,12 +86,12 @@ const ResetPassword = () => {
                     name="username"
                     onChange={inputHandler}
                   />
-                  <label className="form-label" for="form1Example13">
-                    Username
-                  </label>
                 </div>
 
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4 text-start">
+                  <label className="form-label m-1" for="form1Example23">
+                    Email-Id
+                  </label>
                   <input
                     type="email"
                     id="form1Example23"
@@ -96,12 +99,12 @@ const ResetPassword = () => {
                     name="email"
                     onChange={inputHandler}
                   />
-                  <label className="form-label" for="form1Example23">
-                    Email-Id
-                  </label>
                 </div>
 
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4 text-start">
+                  <label className="form-label m-1" for="form1Example23">
+                    New Password
+                  </label>
                   <input
                     type="password"
                     id="form1Example33"
@@ -109,12 +112,12 @@ const ResetPassword = () => {
                     name="password"
                     onChange={inputHandler}
                   />
-                  <label className="form-label" for="form1Example23">
-                    New Password
-                  </label>
                 </div>
 
-                <div className="form-outline mb-4">
+                <div className="form-outline mb-4 text-start">
+                  <label className="form-label m-1" for="form1Example23">
+                    Re-Enter new password
+                  </label>
                   <input
                     type="password"
                     id="form1Example43"
@@ -122,9 +125,6 @@ const ResetPassword = () => {
                     name="cpassword"
                     onChange={inputHandler}
                   />
-                  <label className="form-label" for="form1Example23">
-                    Re-Enter new password
-                  </label>
                 </div>
 
                 <div className="text-center">
